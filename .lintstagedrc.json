@@ -1,0 +1,13 @@
+{
+    "*.ts": [
+      "standard --fix",
+      "prettier --write"
+    ],
+    "*.js": [
+      "standard --fix",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write"
+    ]
+  }
