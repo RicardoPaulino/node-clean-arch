@@ -10,6 +10,11 @@
     "type": "git",
     "url": "git+https://github.com/RicardoPaulino/node-clean-arch.git"
   },
+  "standard": {
+    "env": [
+      "jest"
+    ]
+  },
   "license": "ISC",
   "author": "",
   "type": "commonjs",

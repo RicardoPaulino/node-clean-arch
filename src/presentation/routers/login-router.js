@@ -1,0 +1,19 @@
+const httpResponse = require('../helpers/http-responses')
+
+module.exports = class LoginRouter {
+  route (httpRequest) {
+    if (!httpRequest) {
+      return httpResponse.serverError()
+    }
+    if (!httpRequest.body) {
+      return httpResponse.serverError()
+    }
+    const { email, password } = httpRequest.body || {}
+    if (!email) {
+      return httpResponse.badRequest('email')
+    }
+    if (!password) {
+      return httpResponse.badRequest('password')
+    }
+  }
+}

@@ -1,5 +1,3 @@
-const express = require('express')
-
 module.exports = () => {
   const router = new SignUpRouter()
   router.post('/signup', ExpressRouterAdapter.adapt(router))
