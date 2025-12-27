@@ -1,0 +1,20 @@
+{
+  "name": "aula-01",
+  "version": "1.0.0",
+  "description": "primeira aula de nodejs",
+  "homepage": "https://github.com/RicardoPaulino/node-clean-arch#readme",
+  "bugs": {
+    "url": "https://github.com/RicardoPaulino/node-clean-arch/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RicardoPaulino/node-clean-arch.git"
+  },
+  "license": "ISC",
+  "author": "Ricardo Paulino",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
