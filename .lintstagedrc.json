@@ -1,13 +1,6 @@
 {
-    "*.ts": [
-      "standard --fix",
-      "prettier --write"
-    ],
-    "*.js": [
-      "standard --fix",
-      "git add"
-    ],
-    "*.json": [
-      "prettier --write"
-    ]
-  }
+  "*.{js,ts}": [
+    "standard --fix",
+    "jest --findRelatedTests --passWithNoTests"
+  ]
+}
