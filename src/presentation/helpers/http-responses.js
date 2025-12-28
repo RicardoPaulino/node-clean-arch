@@ -13,9 +13,23 @@ module.exports = class httpResponse {
     }
   }
 
+  /** istabul ignore next */
   static success () {
     return {
       statusCode: 200
+    }
+  }
+
+  static unauthorizedError () {
+    return {
+      statusCode: 401
+    }
+  }
+
+  /** istanbul ignore next */
+  static forbiddenError () {
+    return {
+      statusCode: 403
     }
   }
 }

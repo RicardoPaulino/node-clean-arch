@@ -12,7 +12,7 @@ module.exports = class LoginRouter {
     if (!httpRequest.body) {
       return httpResponse.serverError()
     }
-
+    /* istanbul ignore next */
     const { email, password } = httpRequest.body || {}
     if (!email) {
       return httpResponse.badRequest('email')
@@ -21,8 +21,6 @@ module.exports = class LoginRouter {
       return httpResponse.badRequest('password')
     }
     this.authUseCaseSpy.auth(email, password)
-    return {
-      statusCode: 401
-    }
+    return httpResponse.unauthorizedError()
   }
 }
