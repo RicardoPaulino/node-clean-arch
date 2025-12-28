@@ -1,4 +1,6 @@
 const MissingParamError = require('./missing-param-error')
+const UnauthorizedError = require('./unauthorized-error')
+
 module.exports = class httpResponse {
   static badRequest (paramName) {
     return {
@@ -13,7 +15,6 @@ module.exports = class httpResponse {
     }
   }
 
-  /** istabul ignore next */
   static success () {
     return {
       statusCode: 200
@@ -22,11 +23,11 @@ module.exports = class httpResponse {
 
   static unauthorizedError () {
     return {
-      statusCode: 401
+      statusCode: 401,
+      body: new UnauthorizedError()
     }
   }
 
-  /** istanbul ignore next */
   static forbiddenError () {
     return {
       statusCode: 403
