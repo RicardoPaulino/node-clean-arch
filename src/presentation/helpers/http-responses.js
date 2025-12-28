@@ -28,9 +28,9 @@ module.exports = class httpResponse {
     }
   }
 
-  static forbiddenError () {
-    return {
-      statusCode: 403
-    }
-  }
+  // static forbiddenError () {
+  //   return {
+  //     statusCode: 403
+  //   }
+  // }
 }
