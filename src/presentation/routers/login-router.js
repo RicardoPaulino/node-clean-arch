@@ -5,35 +5,35 @@ module.exports = class LoginRouter {
     this.authUseCaseSpy = authUseCaseSpy
   }
 
-  route (httpRequest) {
+  async route (httpRequest) {
     try {
       if (!httpRequest) {
-        return httpResponse.serverError()
+        return await httpResponse.serverError()
       }
       if (!httpRequest.body) {
-        return httpResponse.serverError()
+        return await httpResponse.serverError()
       }
       if (!this.authUseCaseSpy) {
-        return httpResponse.serverError()
+        return await httpResponse.serverError()
       }
       if (!this.authUseCaseSpy.auth) {
-        return httpResponse.serverError()
+        return await httpResponse.serverError()
       }
       /* istanbul ignore next */
       const { email, password } = httpRequest.body || {}
       if (!email) {
-        return httpResponse.badRequest('email')
+        return await httpResponse.badRequest('email')
       }
       if (!password) {
-        return httpResponse.badRequest('password')
+        return await httpResponse.badRequest('password')
       }
-      const accessToken = this.authUseCaseSpy.auth(email, password)
+      const accessToken = await this.authUseCaseSpy.auth(email, password)
       if (accessToken) {
-        return httpResponse.ok({ accessToken })
+        return await httpResponse.ok({ accessToken })
       }
-      return httpResponse.unauthorizedError()
+      return await httpResponse.unauthorizedError()
     } catch (error) {
-      return httpResponse.serverError()
+      return await httpResponse.serverError()
     }
   }
 }
