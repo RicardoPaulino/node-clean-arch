@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1766942581035" clover="3.2.0">
-  <project timestamp="1766942581035" name="All files">
-    <metrics statements="27" coveredstatements="25" conditionals="8" coveredconditionals="8" methods="9" coveredmethods="7" elements="44" coveredelements="40" complexity="0" loc="27" ncloc="27" packages="2" files="4" classes="4"/>
+<coverage generated="1766943416585" clover="3.2.0">
+  <project timestamp="1766943416586" name="All files">
+    <metrics statements="31" coveredstatements="29" conditionals="12" coveredconditionals="12" methods="9" coveredmethods="7" elements="52" coveredelements="48" complexity="0" loc="31" ncloc="31" packages="2" files="4" classes="4"/>
     <package name="helpers">
       <metrics statements="14" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="5"/>
       <file name="http-responses.js" path="C:\workbspace\node-clean-arch\src\presentation\helpers\http-responses.js">
@@ -10,7 +10,7 @@
         <line num="2" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
         <line num="25" count="2" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
@@ -29,22 +29,26 @@
       </file>
     </package>
     <package name="routers">
-      <metrics statements="13" coveredstatements="13" conditionals="8" coveredconditionals="8" methods="2" coveredmethods="2"/>
+      <metrics statements="17" coveredstatements="17" conditionals="12" coveredconditionals="12" methods="2" coveredmethods="2"/>
       <file name="login-router.js" path="C:\workbspace\node-clean-arch\src\presentation\routers\login-router.js">
-        <metrics statements="13" coveredstatements="13" conditionals="8" coveredconditionals="8" methods="2" coveredmethods="2"/>
+        <metrics statements="17" coveredstatements="17" conditionals="12" coveredconditionals="12" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
-        <line num="5" count="6" type="stmt"/>
-        <line num="9" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="9" count="8" type="cond" truecount="2" falsecount="0"/>
         <line num="10" count="1" type="stmt"/>
-        <line num="12" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="12" count="7" type="cond" truecount="2" falsecount="0"/>
         <line num="13" count="1" type="stmt"/>
-        <line num="17" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="20" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="23" count="2" type="stmt"/>
-        <line num="24" count="2" type="stmt"/>
+        <line num="15" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="18" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="23" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="26" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
       </file>
     </package>
   </project>

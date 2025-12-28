@@ -12,6 +12,12 @@ module.exports = class LoginRouter {
     if (!httpRequest.body) {
       return httpResponse.serverError()
     }
+    if (!this.authUseCaseSpy) {
+      return httpResponse.serverError()
+    }
+    if (!this.authUseCaseSpy.auth) {
+      return httpResponse.serverError()
+    }
     /* istanbul ignore next */
     const { email, password } = httpRequest.body || {}
     if (!email) {
