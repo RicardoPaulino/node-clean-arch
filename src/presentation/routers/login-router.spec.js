@@ -111,14 +111,16 @@ describe('Login Router', () => {
   })
 
   test('Should return 200 when credentials are valid', () => {
-    const { sut } = makeSUT()
+    const { sut, authUseCaseSpy } = makeSUT()
     const httpRequest = {
       body: {
         email: 'any_email@mail.com',
-        password: 'any_password'
+        password: 'any_password',
+        accessToken: 'valid_token'
       }
     }
     const httpResponse = sut.route(httpRequest)
     expect(httpResponse.statusCode).toBe(200)
+    expect(httpResponse.body.accessToken).toEqual(authUseCaseSpy.accessToken)
   })
 })
