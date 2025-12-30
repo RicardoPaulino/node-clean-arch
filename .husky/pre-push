@@ -1,2 +1,2 @@
 npx jest --passWithNoTests && 
-npx jest --color --coverage 
+npx jest --coverage 
