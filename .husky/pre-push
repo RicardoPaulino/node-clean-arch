@@ -1,2 +1,0 @@
-npx jest --passWithNoTests && 
-npx jest --coverage 
