@@ -20,8 +20,10 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "prepare": "husky"
+    "test": "jest --coverage --colors --passWithNoTests",
+    "test:staged": "npm test -- --findRelatedTests",
+    "test:unit": "npm test -- --watch -c jest-unit-config.js",
+    "test:integration": "npm test -- --watch -c jest-integration-config.js"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",

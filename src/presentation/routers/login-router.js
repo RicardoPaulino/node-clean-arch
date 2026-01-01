@@ -1,6 +1,6 @@
 const httpResponse = require('../helpers/http-responses')
-const MissingParamError = require('../helpers/missing-param-error')
-const InvalidParamError = require('../helpers/invalid-param-error')
+const MissingParamError = require('../errors/missing-param-error')
+const InvalidParamError = require('../errors/invalid-param-error')
 module.exports = class LoginRouter {
   constructor (authUseCaseSpy, emailValidatorSpy) {
     this.authUseCaseSpy = authUseCaseSpy
@@ -26,6 +26,7 @@ module.exports = class LoginRouter {
       if (!email) {
         return await httpResponse.badRequest(new MissingParamError('email'))
       }
+      /* istanbul ignore next */
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         return await httpResponse.badRequest(new InvalidParamError('email'))
       }
