@@ -20,7 +20,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage --colors --passWithNoTests",
+    "test": "jest  --coverage --colors --passWithNoTests",
     "test:staged": "npm test -- --findRelatedTests",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
     "test:integration": "npm test -- --watch -c jest-integration-config.js"

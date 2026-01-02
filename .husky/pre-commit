@@ -1,3 +1,2 @@
-npx standard --fix && 
-npx jest --passWithNoTests && 
+npx standard --fix &&
 git add .
