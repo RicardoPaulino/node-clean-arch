@@ -1,7 +1,7 @@
+const validator = require('validator')
 class EmailValidator {
   isValid (email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailRegex.test(email)
+    return validator.isEmail(email)
   }
 }
 
@@ -13,6 +13,7 @@ describe('Email Validator', () => {
   })
   test('should return false if validator returns false', () => {
     const sut = new EmailValidator()
+    validator.isEmailValid = false
     const isEmailValid = sut.isValid('invalid_email.com')
     expect(isEmailValid).toBe(false)
   })
