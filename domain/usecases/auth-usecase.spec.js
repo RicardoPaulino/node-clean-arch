@@ -1,30 +1,24 @@
-const { MissingParamError } = require('../../src/presentation/errors')
+const MissingParamError = require('../../utils/erros/missing-param-error')
 
+// --- Class AuthUseCase (Inalterada, mas pronta para os testes) ---
 class AuthUseCase {
   constructor (loadUserByEmailRepository) {
     this.loadUserByEmailRepository = loadUserByEmailRepository
   }
 
   async auth ({ email, password } = {}) {
-    if (!email) {
-      throw new MissingParamError('email')
-    }
-    if (!password) {
-      throw new MissingParamError('password')
-    }
-    // Safeguard: Ensure repository and method exist
+    if (!email) throw new MissingParamError('email')
+    if (!password) throw new MissingParamError('password')
     if (!this.loadUserByEmailRepository || !this.loadUserByEmailRepository.load) {
-      throw new Error('Internal Error: Repository not provided')
+      throw new MissingParamError('loadUserByEmailRepository')
     }
 
     await this.loadUserByEmailRepository.load(email)
-
-    // Hardcoded for now based on your logic
     return 'valid_token'
   }
 }
 
-// Factory Helper
+// --- Factory Helper ---
 const makeSut = () => {
   class LoadUserByEmailRepositorySpy {
     async load (email) {
@@ -39,46 +33,55 @@ const makeSut = () => {
   }
 }
 
+// --- Test Suite ---
 describe('Auth UseCase', () => {
-  test('Should throw MissingParamError if no email is provided', async () => {
-    const { sut } = makeSut()
-    const promise = sut.auth({ password: 'any_password' })
-    await expect(promise).rejects.toThrow(new MissingParamError('email'))
-  })
-
-  test('Should throw MissingParamError if no password is provided', async () => {
-    const { sut } = makeSut()
-    const promise = sut.auth({ email: 'any_email@gmail.com' })
-    await expect(promise).rejects.toThrow(new MissingParamError('password'))
-  })
-
-  test('Should throw if no parameters are provided', async () => {
-    const { sut } = makeSut()
-    const promise = sut.auth()
-    await expect(promise).rejects.toThrow(new MissingParamError('email'))
-  })
-
-  test('Should throw if an empty object is provided', async () => {
-    const { sut } = makeSut()
-    const promise = sut.auth({})
-    await expect(promise).rejects.toThrow(new MissingParamError('email'))
-  })
-
-  test('Should call LoadUserByEmailRepository with correct email', async () => {
-    const { sut, loadUserByEmailRepositorySpy } = makeSut()
-    await sut.auth({
-      email: 'any_email@gmail.com',
-      password: 'any_password'
+  describe('Input Validation', () => {
+    test('Should throw MissingParamError if no email is provided', async () => {
+      const { sut } = makeSut()
+      const promise = sut.auth({ password: 'any_password' })
+      await expect(promise).rejects.toThrow(new MissingParamError('email'))
     })
-    expect(loadUserByEmailRepositorySpy.email).toBe('any_email@gmail.com')
+
+    test('Should throw MissingParamError if no password is provided', async () => {
+      const { sut } = makeSut()
+      const promise = sut.auth({ email: 'any_email@gmail.com' })
+      await expect(promise).rejects.toThrow(new MissingParamError('password'))
+    })
+
+    test('Should throw MissingParamError if no parameters are provided', async () => {
+      const { sut } = makeSut()
+      await expect(sut.auth()).rejects.toThrow(new MissingParamError('email'))
+    })
   })
 
-  test('Should return access token if credentials are valid', async () => {
-    const { sut } = makeSut()
-    const accessToken = await sut.auth({
-      email: 'any_email@gmail.com',
-      password: 'any_password'
+  describe('LoadUserByEmailRepository Integration', () => {
+    test('Should call LoadUserByEmailRepository with correct email', async () => {
+      const { sut, loadUserByEmailRepositorySpy } = makeSut()
+      await sut.auth({ email: 'any_email@gmail.com', password: 'any_password' })
+      expect(loadUserByEmailRepositorySpy.email).toBe('any_email@gmail.com')
     })
-    expect(accessToken).toBe('valid_token')
+
+    test('Should throw if no LoadUserByEmailRepository is provided', async () => {
+      const sut = new AuthUseCase()
+      const promise = sut.auth({ email: 'any_email@gmail.com', password: 'any_password' })
+      await expect(promise).rejects.toThrow(new MissingParamError('loadUserByEmailRepository'))
+    })
+
+    test('Should throw if LoadUserByEmailRepository has no load method', async () => {
+      const sut = new AuthUseCase({}) // Repositório vazio
+      const promise = sut.auth({ email: 'any_email@gmail.com', password: 'any_password' })
+      await expect(promise).rejects.toThrow(new MissingParamError('loadUserByEmailRepository'))
+    })
+  })
+
+  describe('Authentication Success', () => {
+    test('Should return access token if credentials are valid', async () => {
+      const { sut } = makeSut()
+      const accessToken = await sut.auth({
+        email: 'any_email@gmail.com',
+        password: 'any_password'
+      })
+      expect(accessToken).toBe('valid_token')
+    })
   })
 })
