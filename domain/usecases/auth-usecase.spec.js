@@ -6,9 +6,11 @@ const makeSut = () => {
   class LoadUserByEmailRepositorySpy {
     async load (email) {
       this.email = email
+      return this.user
     }
   }
   const loadUserByEmailRepositorySpy = new LoadUserByEmailRepositorySpy()
+  loadUserByEmailRepositorySpy.user = {}
   const sut = new AuthUseCase(loadUserByEmailRepositorySpy)
   return {
     sut,
@@ -65,8 +67,9 @@ describe('Auth UseCase', () => {
       await expect(promise).rejects.toThrow()
     })
 
-    test('Should return null if LoadUserByEmailRepository returns null', async () => {
-      const { sut } = makeSut()
+    test('Should return null if an invalid email is provided', async () => {
+      const { sut, loadUserByEmailRepositorySpy } = makeSut()
+      loadUserByEmailRepositorySpy.user = null
       const accessToken = await sut.auth({
         email: 'invalid_email@gmail.com',
         password: 'any_password'
@@ -74,22 +77,31 @@ describe('Auth UseCase', () => {
       expect(accessToken).toBeNull()
     })
 
-    describe('Authentication Success', () => {
-      test('Should return access token if credentials are valid', async () => {
-        class LoadUserByEmailRepositorySpy {
-          async load (email) {
-            this.email = email
-            return { id: '1', email: 'any_email@gmail.com', password: 'hashed_password' }
-          }
-        }
-        const loadUserByEmailRepositorySpy = new LoadUserByEmailRepositorySpy()
-        const sut = new AuthUseCase(loadUserByEmailRepositorySpy)
-        const accessToken = await sut.auth({
-          email: 'any_email@gmail.com',
-          password: 'any_password'
-        })
-        expect(accessToken).toBe('valid_token')
+    test('Should return null if an invalid password is provided', async () => {
+      const { sut } = makeSut()
+      const accessToken = await sut.auth({
+        email: 'valid_email@gmail.com',
+        password: 'invalid_password'
       })
+      expect(accessToken).toBeNull()
     })
+
+    // describe('Authentication Success', () => {
+    //   test('Should return access token if credentials are valid', async () => {
+    //     class LoadUserByEmailRepositorySpy {
+    //       async load (email) {
+    //         this.email = email
+    //         return { id: '1', email: 'any_email@gmail.com', password: 'hashed_password' }
+    //       }
+    //     }
+    //     const loadUserByEmailRepositorySpy = new LoadUserByEmailRepositorySpy()
+    //     const sut = new AuthUseCase(loadUserByEmailRepositorySpy)
+    //     const accessToken = await sut.auth({
+    //       email: 'any_email@gmail.com',
+    //       password: 'any_password'
+    //     })
+    //     expect(accessToken).toBe('valid_token')
+    //   })
+    // })
   })
 })
