@@ -17,7 +17,8 @@ class AuthUseCase {
       throw new InvalidParamError('loadUserByEmailRepository')
     }
 
-    await this.loadUserByEmailRepository.load(email)
+    const user = await this.loadUserByEmailRepository.load(email)
+    if (!user) return null
     return 'valid_token'
   }
 }
@@ -61,31 +62,53 @@ describe('Auth UseCase', () => {
   describe('LoadUserByEmailRepository Integration', () => {
     test('Should call LoadUserByEmailRepository with correct email', async () => {
       const { sut, loadUserByEmailRepositorySpy } = makeSut()
-      await sut.auth({ email: 'any_email@gmail.com', password: 'any_password' })
+      await sut.auth({
+        email: 'any_email@gmail.com',
+        password: 'any_password'
+      })
       expect(loadUserByEmailRepositorySpy.email).toBe('any_email@gmail.com')
     })
 
     test('Should throw if no LoadUserByEmailRepository is provided', async () => {
       const sut = new AuthUseCase()
-      const promise = sut.auth({ email: 'any_email@gmail.com', password: 'any_password' })
-      await expect(promise).rejects.toThrow(new MissingParamError('loadUserByEmailRepository'))
+      const promise = sut.auth({
+        email: 'any_email@gmail.com',
+        password: 'any_password'
+      })
+      await expect(promise).rejects.toThrow(
+        new MissingParamError('loadUserByEmailRepository')
+      )
     })
 
     test('Should throw if LoadUserByEmailRepository has no load method', async () => {
       const sut = new AuthUseCase({}) // Repositório vazio
-      const promise = sut.auth({ email: 'any_email@gmail.com', password: 'any_password' })
-      await expect(promise).rejects.toThrow(new InvalidParamError('loadUserByEmailRepository'))
-    })
-  })
-
-  describe('Authentication Success', () => {
-    test('Should return access token if credentials are valid', async () => {
-      const { sut } = makeSut()
-      const accessToken = await sut.auth({
+      const promise = sut.auth({
         email: 'any_email@gmail.com',
         password: 'any_password'
       })
-      expect(accessToken).toBe('valid_token')
+      await expect(promise).rejects.toThrow(
+        new InvalidParamError('loadUserByEmailRepository')
+      )
+    })
+
+    test('Should return null if LoadUserByEmailRepository returns null', async () => {
+      const { sut } = makeSut()
+      const accessToken = await sut.auth({
+        email: 'invalid_email@gmail.com',
+        password: 'any_password'
+      })
+      expect(accessToken).toBeNull()
+    })
+
+    describe('Authentication Success', () => {
+      test('Should return access token if credentials are valid', async () => {
+        const { sut } = makeSut()
+        const accessToken = await sut.auth({
+          email: 'any_email@gmail.com',
+          password: 'any_password'
+        })
+        expect(accessToken).toBe('valid_token')
+      })
     })
   })
 })

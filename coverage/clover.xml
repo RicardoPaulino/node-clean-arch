@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1767532473357" clover="3.2.0">
-  <project timestamp="1767532473357" name="All files">
+<coverage generated="1767533256955" clover="3.2.0">
+  <project timestamp="1767533256956" name="All files">
     <metrics statements="48" coveredstatements="48" conditionals="16" coveredconditionals="16" methods="10" coveredmethods="10" elements="74" coveredelements="74" complexity="0" loc="48" ncloc="48" packages="4" files="7" classes="7"/>
     <package name="src.presentation.errors">
       <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
@@ -72,15 +72,15 @@
       <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
       <file name="invalid-param-error.js" path="C:\workbspace\node-clean-arch\utils\erros\invalid-param-error.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="3" count="3" type="stmt"/>
-        <line num="4" count="3" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
       </file>
       <file name="missing-param-error.js" path="C:\workbspace\node-clean-arch\utils\erros\missing-param-error.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="3" count="12" type="stmt"/>
-        <line num="4" count="12" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
       </file>
     </package>
   </project>
