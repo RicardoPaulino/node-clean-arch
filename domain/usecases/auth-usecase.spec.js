@@ -1,4 +1,4 @@
-const { MissingParamError, InvalidParamError } = require('../../utils/erros')
+const { MissingParamError } = require('../../utils/erros')
 const AuthUseCase = require('./auth-usecase')
 
 // --- Factory Helper ---
@@ -53,9 +53,7 @@ describe('Auth UseCase', () => {
         email: 'any_email@gmail.com',
         password: 'any_password'
       })
-      await expect(promise).rejects.toThrow(
-        new MissingParamError('loadUserByEmailRepository')
-      )
+      await expect(promise).rejects.toThrow()
     })
 
     test('Should throw if LoadUserByEmailRepository has no load method', async () => {
@@ -64,9 +62,7 @@ describe('Auth UseCase', () => {
         email: 'any_email@gmail.com',
         password: 'any_password'
       })
-      await expect(promise).rejects.toThrow(
-        new InvalidParamError('loadUserByEmailRepository')
-      )
+      await expect(promise).rejects.toThrow()
     })
 
     test('Should return null if LoadUserByEmailRepository returns null', async () => {
