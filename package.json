@@ -18,12 +18,15 @@
   "license": "ISC",
   "author": "",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "index.js",  
   "scripts": {
-    "test": "jest --coverage --colors --passWithNoTests",
-    "test:staged": "npm test -- --findRelatedTests",
+    "test": "jest --colors --noStackTrace --passWithNoTests",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
-    "test:integration": "npm test -- --watch -c jest-integration-config.js"
+    "test:cov": "npm test -- --coverage",
+    "test:view-cov": "npm run test:cov && open coverage/lcov-report/index.html",
+    "lint": "standard",
+    "lint:fix": "standard --fix",
+    "test:staged": "npm test -- --findRelatedTests"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
