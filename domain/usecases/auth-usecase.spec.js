@@ -161,6 +161,7 @@ describe('Auth UseCase', () => {
           password: 'any_password'
         })
         expect(accessToken).toBe(tokenGeneratorSpy.accessToken)
+        expect(accessToken).toBeTruthy()
       })
     })
   })
