@@ -2,7 +2,20 @@ const { MissingParamError } = require('../../utils/erros')
 const AuthUseCase = require('./auth-usecase')
 
 // --- Factory Helper ---
-const makeSut = () => {
+const makeEncrypter = () => {
+  class EncrypterSpy {
+    async compare (password, hashedPassword) {
+      this.password = password
+      this.hashedPassword = hashedPassword
+      return this.isValid
+    }
+  }
+  const encrypterSpy = new EncrypterSpy()
+  encrypterSpy.isValid = true
+  return encrypterSpy
+}
+
+const makeLoadUserByEmailRepository = () => {
   class LoadUserByEmailRepositorySpy {
     async load (email) {
       this.email = email
@@ -10,11 +23,18 @@ const makeSut = () => {
     }
   }
   const loadUserByEmailRepositorySpy = new LoadUserByEmailRepositorySpy()
-  loadUserByEmailRepositorySpy.user = {}
-  const sut = new AuthUseCase(loadUserByEmailRepositorySpy)
+  loadUserByEmailRepositorySpy.user = { password: 'hashed_password' }
+  return loadUserByEmailRepositorySpy
+}
+
+const makeSut = () => {
+  const encryptedSpy = makeEncrypter()
+  const loadUserByEmailRepositorySpy = makeLoadUserByEmailRepository()
+  const sut = new AuthUseCase(loadUserByEmailRepositorySpy, encryptedSpy)
   return {
     sut,
-    loadUserByEmailRepositorySpy
+    loadUserByEmailRepositorySpy,
+    encryptedSpy
   }
 }
 
@@ -78,12 +98,26 @@ describe('Auth UseCase', () => {
     })
 
     test('Should return null if an invalid password is provided', async () => {
-      const { sut } = makeSut()
+      const { sut, encryptedSpy } = makeSut()
+      encryptedSpy.isValid = false
       const accessToken = await sut.auth({
         email: 'valid_email@gmail.com',
         password: 'invalid_password'
       })
       expect(accessToken).toBeNull()
+    })
+
+    test('Should call Encrypter if valid credentials are provided', async () => {
+      const { sut, loadUserByEmailRepositorySpy, encryptedSpy } = makeSut()
+      loadUserByEmailRepositorySpy.user = { password: 'hashed_password' }
+      await sut.auth({
+        email: 'valid_email@gmail.com',
+        password: 'any_password'
+      })
+      expect(encryptedSpy.password).toBe('any_password')
+      expect(encryptedSpy.hashedPassword).toBe(
+        loadUserByEmailRepositorySpy.user.password
+      )
     })
 
     // describe('Authentication Success', () => {

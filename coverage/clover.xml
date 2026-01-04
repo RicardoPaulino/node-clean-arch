@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1767536354969" clover="3.2.0">
-  <project timestamp="1767536354969" name="All files">
-    <metrics statements="59" coveredstatements="59" conditionals="23" coveredconditionals="23" methods="12" coveredmethods="12" elements="94" coveredelements="94" complexity="0" loc="59" ncloc="59" packages="5" files="9" classes="9"/>
+<coverage generated="1767549379129" clover="3.2.0">
+  <project timestamp="1767549379130" name="All files">
+    <metrics statements="62" coveredstatements="62" conditionals="25" coveredconditionals="25" methods="12" coveredmethods="12" elements="99" coveredelements="99" complexity="0" loc="62" ncloc="62" packages="5" files="9" classes="9"/>
     <package name="domain.usecases">
-      <metrics statements="8" coveredstatements="8" conditionals="7" coveredconditionals="7" methods="2" coveredmethods="2"/>
+      <metrics statements="11" coveredstatements="11" conditionals="9" coveredconditionals="9" methods="2" coveredmethods="2"/>
       <file name="auth-usecase.js" path="C:\workbspace\node-clean-arch\domain\usecases\auth-usecase.js">
-        <metrics statements="8" coveredstatements="8" conditionals="7" coveredconditionals="7" methods="2" coveredmethods="2"/>
+        <metrics statements="11" coveredstatements="11" conditionals="9" coveredconditionals="9" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
-        <line num="5" count="8" type="stmt"/>
-        <line num="9" count="8" type="cond" truecount="2" falsecount="0"/>
-        <line num="10" count="6" type="cond" truecount="2" falsecount="0"/>
-        <line num="11" count="5" type="stmt"/>
-        <line num="12" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="13" count="2" type="stmt"/>
+        <line num="5" count="9" type="stmt"/>
+        <line num="6" count="9" type="stmt"/>
+        <line num="10" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="12" count="6" type="stmt"/>
+        <line num="13" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="15" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="2" type="stmt"/>
       </file>
     </package>
     <package name="src.presentation.errors">
