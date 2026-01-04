@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1767533256955" clover="3.2.0">
-  <project timestamp="1767533256956" name="All files">
-    <metrics statements="48" coveredstatements="48" conditionals="16" coveredconditionals="16" methods="10" coveredmethods="10" elements="74" coveredelements="74" complexity="0" loc="48" ncloc="48" packages="4" files="7" classes="7"/>
+<coverage generated="1767535092098" clover="3.2.0">
+  <project timestamp="1767535092098" name="All files">
+    <metrics statements="63" coveredstatements="63" conditionals="27" coveredconditionals="27" methods="12" coveredmethods="12" elements="102" coveredelements="102" complexity="0" loc="63" ncloc="63" packages="5" files="9" classes="9"/>
+    <package name="domain.usecases">
+      <metrics statements="12" coveredstatements="12" conditionals="11" coveredconditionals="11" methods="2" coveredmethods="2"/>
+      <file name="auth-usecase.js" path="C:\workbspace\node-clean-arch\domain\usecases\auth-usecase.js">
+        <metrics statements="12" coveredstatements="12" conditionals="11" coveredconditionals="11" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="9" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="10" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="14" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="18" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="1" type="stmt"/>
+      </file>
+    </package>
     <package name="src.presentation.errors">
       <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
       <file name="index.js" path="C:\workbspace\node-clean-arch\src\presentation\errors\index.js">
@@ -69,18 +87,24 @@
       </file>
     </package>
     <package name="utils.erros">
-      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="index.js" path="C:\workbspace\node-clean-arch\utils\erros\index.js">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+      </file>
       <file name="invalid-param-error.js" path="C:\workbspace\node-clean-arch\utils\erros\invalid-param-error.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
       </file>
       <file name="missing-param-error.js" path="C:\workbspace\node-clean-arch\utils\erros\missing-param-error.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="3" count="4" type="stmt"/>
-        <line num="4" count="4" type="stmt"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="3" count="12" type="stmt"/>
+        <line num="4" count="12" type="stmt"/>
       </file>
     </package>
   </project>

@@ -1,27 +1,5 @@
-const MissingParamError = require('../../utils/erros/missing-param-error')
-const InvalidParamError = require('../../utils/erros/invalid-param-error')
-
-// --- Class AuthUseCase (Inalterada, mas pronta para os testes) ---
-class AuthUseCase {
-  constructor (loadUserByEmailRepository) {
-    this.loadUserByEmailRepository = loadUserByEmailRepository
-  }
-
-  async auth ({ email, password } = {}) {
-    if (!email) throw new MissingParamError('email')
-    if (!password) throw new MissingParamError('password')
-    if (!this.loadUserByEmailRepository) {
-      throw new MissingParamError('loadUserByEmailRepository')
-    }
-    if (!this.loadUserByEmailRepository.load) {
-      throw new InvalidParamError('loadUserByEmailRepository')
-    }
-
-    const user = await this.loadUserByEmailRepository.load(email)
-    if (!user) return null
-    return 'valid_token'
-  }
-}
+const { MissingParamError, InvalidParamError } = require('../../utils/erros')
+const AuthUseCase = require('./auth-usecase')
 
 // --- Factory Helper ---
 const makeSut = () => {
@@ -102,7 +80,14 @@ describe('Auth UseCase', () => {
 
     describe('Authentication Success', () => {
       test('Should return access token if credentials are valid', async () => {
-        const { sut } = makeSut()
+        class LoadUserByEmailRepositorySpy {
+          async load (email) {
+            this.email = email
+            return { id: '1', email: 'any_email@gmail.com', password: 'hashed_password' }
+          }
+        }
+        const loadUserByEmailRepositorySpy = new LoadUserByEmailRepositorySpy()
+        const sut = new AuthUseCase(loadUserByEmailRepositorySpy)
         const accessToken = await sut.auth({
           email: 'any_email@gmail.com',
           password: 'any_password'
