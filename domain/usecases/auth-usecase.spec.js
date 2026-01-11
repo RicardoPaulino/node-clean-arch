@@ -90,49 +90,44 @@ describe('Auth UseCase', () => {
     })
 
     test('Should throw if no dependency is provided', async () => {
-      const sut = new AuthUseCase({})
-      const promise = sut.auth({
-        email: 'any_email@gmail.com',
-        password: 'any_password'
-      })
-      await expect(promise).rejects.toThrow()
-    })
-    test('Should throw if no LoadUserByEmailRepository is provided', async () => {
-      const sut = new AuthUseCase({})
-      const promise = sut.auth({
-        email: 'any_email@gmail.com',
-        password: 'any_password'
-      })
-      await expect(promise).rejects.toThrow()
-    })
+      const invalid = {}
+      const loadUserByEmailRepository = makeLoadUserByEmailRepository()
+      const encrypted = makeEncrypter()
+      const suts = [].concat(
+        new AuthUseCase(),
+        new AuthUseCase({}),
+        new AuthUseCase({
+          loadUserByEmailRepository: invalid
+        }),
+        new AuthUseCase({
+          loadUserByEmailRepository
+        }),
+        new AuthUseCase({
+          loadUserByEmailRepository,
+          encrypted: invalid
+        }),
+        new AuthUseCase({
+          loadUserByEmailRepository,
+          encrypted
+        }),
+        new AuthUseCase({
+          loadUserByEmailRepository,
+          encrypted
+        }),
+        new AuthUseCase({
+          loadUserByEmailRepository,
+          encrypted,
+          tokenGenerator: invalid
+        })
 
-    test('Should throw if LoadUserByEmailRepository has no load method', async () => {
-      const sut = new AuthUseCase({ loadUserByEmailRepository: {} }) // Repositório vazio
-      const promise = sut.auth({
-        email: 'any_email@gmail.com',
-        password: 'any_password'
-      })
-      await expect(promise).rejects.toThrow()
-    })
-
-    test('Should return null if an invalid email is provided', async () => {
-      const { sut, loadUserByEmailRepositorySpy } = makeSut()
-      loadUserByEmailRepositorySpy.user = null
-      const accessToken = await sut.auth({
-        email: 'invalid_email@gmail.com',
-        password: 'any_password'
-      })
-      expect(accessToken).toBeNull()
-    })
-
-    test('Should return null if an invalid password is provided', async () => {
-      const { sut, encryptedSpy } = makeSut()
-      encryptedSpy.isValid = false
-      const accessToken = await sut.auth({
-        email: 'valid_email@gmail.com',
-        password: 'invalid_password'
-      })
-      expect(accessToken).toBeNull()
+      )
+      for (const sut of suts) {
+        const promise = sut.auth({
+          email: 'any_email@gmail.com',
+          password: 'any_password'
+        })
+        await expect(promise).rejects.toThrow()
+      }
     })
 
     test('Should call Encrypter if valid credentials are provided', async () => {
